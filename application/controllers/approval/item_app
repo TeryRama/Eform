@@ -1,0 +1,265 @@
+<?php
+
+switch($frmkode){
+case $frmkode == 'frmehs037' :
+	$itemhead = array('No' , 'Tanggal' , 'Tanggal Sampling', 'Dilaporkan Oleh' , 'Diketahui Oleh' , 'Diketahui Oleh', 'Diketahui Oleh');
+break;
+case $frmkode == 'frmehs058' :
+	$itemhead = array(  'Doc', 'Tanggal Sampling',  'Area Sampling', 'Rev' , 'Tanggal Verifikasi', 'Hasil Verifikasi', 'Dilaporkan Oleh' , 'Diketahui Oleh' , 'Disetujui Oleh', 'Dilaporkan Oleh' , 'Diketahui Oleh' , 'Disetujui Oleh');
+break;
+case $frmkode == 'frmehs059' :
+	$itemhead = array( 'Doc No' , 'Rev' , 'Tanggal Pengambilan Sampel' , 'Waktu Pengambilan Sampel', 'Tempat Pengambilan Sampel', 'app1' , 'app2' , 'app3' , 'app4');
+break;
+case $frmkode == 'frmfss069' :
+	$itemhead = array( 'Doc No' ,  'Production Date', 'Reported By' , 'Confirmed By' , 'Noted By' , 'Approved By');
+break;
+case $frmkode == 'frmfss084' :
+	$itemhead = array('docno' , 'Tanggal' , 'Tanggal Pembuatan Laporan', 'Reported By' , 'Reported By' , 'Confirmed By' , 'Confirmed By' , 'Acknowledged By');
+break;
+case $frmkode == 'frmfss086' :
+	$itemhead = array( 'Doc' , 'Rev' , 'Tanggal', 'Reported By' , 'Checked By' , 'Checked By' , 'Confirmed By', 'Confirmed By', 'Acknowledged By');
+break;
+case $frmkode == 'frmfss087' :
+	$itemhead = array( 'Doc' , 'Date' , 'Kategori Produk' , 'Formula' , 'Production Date' ,  'Expiry Date/ Best Before Date', 'Filler' , 'Berat Pack Kosong' , 'nm_produk_2' , 'pack_kosong' , 'productiondate' , 'qty_produced' , 'qty_taken' ,  'ukuran', 'Reported By' , 'Reported By' , 'Reported By' , 'Checked By', 'Confirmed By');
+break;
+case $frmkode == 'frmfss088' :
+	$itemhead = array( 'Doc' , 'Date', 'Reported By' , 'Received By'); 
+break;
+case $frmkode == 'frmfss089' :
+	$itemhead = array( 'Doc' , 'Date' , 'Production Date' , 'Expiry Date' ,  'Formula' ,  'ID Product' , 'Paacking Size' , 'app1' , 'app2' , 'app3' , 'app4' , 'app5');
+break;
+case $frmkode == 'frmfss090' :
+	$itemhead = array('Doc' , 'Date' , 'Kategori Produk' , 'Production Date', 'Reported By' , 'Confirmed By' , 'Received By');
+break;
+case $frmkode == 'frmfss091' :
+	$itemhead = array('Doc' , 'Date' , 'Jenis Produk' , 'Packing', 'Released By' , 'Certified By' , 'Received By');
+break;
+case $frmkode == 'frmfss092' :
+    $itemhead = array( 'Doc No' , 'Rev' , 'Date' , 'Tanggal Pengambilan Sampel' ,  'Formula' , 'Production Date' , 'Packaging' ,  'Departemen' , 'Reported By' , 'Confirmed By' , 'Approved By' , 'app4' , 'app5' , 'app6' , 'app7');
+
+	$itemhead = array(  'docno', 'revisi' , 'tanggal' , 'tgl_sampel' , 'formula092' ,  'production_date' , 'packaging_cmp' , 'departemen' , 'app1' , 'app2' , 'app3' , 'app4' , 'app5' , 'app6' , 'app7');
+break;
+case $frmkode == 'frmfss093' :
+	$itemhead = array('area' , 'completecomp' , 'completecompx' , 'completedate' , 'productiondate', 'app1' , 'app2' , 'app3');
+	$itemhead = array('app1' , 'app2' , 'app3' , 'area' , 'completecomp' , 'completecompx' , 'completedate' , 'productiondate');
+break;
+case $frmkode == 'frmfss095' :
+	$itemhead = array('app1' , 'completeby' , 'completebyx' , 'completecomp' , 'completecompx' , 'completecompX' , 'completedate' , 'completedatex' , 'completetime' , 'completetimex' ,   'tgl_data' , 'tgl_produksi' , 'tipe_produk');
+break;
+case $frmkode == 'frmfss096' :
+	$itemhead = array('app1' , 'app2' , 'app3' , 'avg_gross' , 'avg_net' , 'avg_net_empty' , 'bbd' , 'completeby' , 'completebyx' , 'completecomp' , 'completecompx' , 'completecompX' , 'completedate' , 'completedatex' , 'completetime' , 'completetimex' , 'dtdate' , 'dtdoc' , 'filler' , 'formula' ,  'kategori_produk' , 'kategori_produk_2' , 'nm_produk' , 'nm_produk_2' , 'pack_kosong' , 'productiondate' ,  'ukuran');
+break;
+case $frmkode == 'frmfss097' :
+	$itemhead = array('app1' , 'app2' , 'app3' , 'app4'  , 'create_date' , 'docno',  'jenis_produk' ,  'tanggal' , 'tgl_laporan');
+break;
+case $frmkode == 'frmfss098' :
+	$itemhead = array('app1' , 'app2' , 'app3' , 'completecomp' , 'completecompx' , 'completedate' , 'docno' , 'productiondate');
+break;
+case $frmkode == 'frmfss108' :
+	$itemhead = array('app1' , 'app2' , 'app3'  , 'delivery_for' , 'dtdate' , 'dtdoc' , 'dtrev' ,  'jns_inspeksi');
+break;
+case $frmkode == 'frmfss109' :
+	$itemhead = array('app1'  , 'docno' , 'filler' ,  'product_id' ,  'tanggal' , 'tgl_kadaluwarsa' , 'tgl_produksi');
+break;
+case $frmkode == 'frmfss115' :
+	$itemhead = array('app1' , 'app2' , 'app3' , 'bagian' , 'buyer'  , 'create_date' , 'departemen' , 'dtdoc' , 'filler' , 'grade_dc' ,  'jenis_produk' , 'jns_produk' , 'jns_produk_2' , 'kegunaan' , 'line_produksi' , 'month' , 'nm_produk' , 'no_po' , 'packaging_cmp' , 'shipment' ,  'tgl_produksi' , 'tipe_contoh');
+break;
+case $frmkode == 'frmfss116' :
+	$itemhead = array('app1' , 'app2' , 'app3' , 'app4' , 'app5' , 'app6' , 'app7'  , 'create_date' , 'docno' , 'tgl_produksi');
+break;
+case $frmkode == 'frmfss120' :
+	$itemhead = array('app1' , 'app2' , 'app3' , 'area' , 'completecomp' , 'completecompx' , 'completedate' , 'productiondate');
+break;
+case $frmkode == 'frmfss121' :
+	$itemhead = array('app1' , 'app2' , 'app3' , 'app4' , 'app5' , 'app6' , 'app7'  , 'docno' , 'dtinc_day' , 'filler' ,  'no_formula' ,  'tanggal' , 'tgl_analis' , 'tgl_expired' , 'tgl_produksi');
+break;
+case $frmkode == 'frmfss128' :
+	$itemhead = array('app1' , 'app2' , 'app3' , 'app4' , 'app5' , 'app6' , 'app7'  , 'create_date' , 'docno' , 'dtdate' , 'grade_dc' , 'granulasi_retension1' , 'granulasi_retension1a' , 'granulasi_retension2' , 'granulasi_retension2a' , 'granulasi_retension3' , 'granulasi_retension3a' , 'granulasi_retension4' , 'granulasi_retension4a' , 'granulasi_retension5' , 'granulasi_retension5a' , 'hdr2_granulation_1' , 'hdr2_granulation_2' , 'hdr2_granulation_3' , 'hdr2_granulation_4' , 'hdr2_granulation_5' , 'hdr2_granulation_6' , 'hdr2_granulation_7' , 'hdr_granulation_1' , 'hdr_granulation_2' , 'hdr_granulation_3' , 'hdr_granulation_4' , 'hdr_granulation_5' , 'hdr_granulation_6' , 'hdr_granulation_7' ,  'line_ket' , 'line_produksi' , 'product_id' ,  'tgl_produksi');
+break;
+case $frmkode == 'frmfss153' :
+	$itemhead = array('app1' , 'app2' , 'app3' , 'app4' , 'app5'  , 'docno' , 'expiry_date' , 'filler' ,  'produk_id' , 'produksi_date' ,  'tanggal_doc');
+break;
+case $frmkode == 'frmfss155' :
+	$itemhead = array('app1' , 'app2' , 'app3'  , 'date' , 'docno' ,  'line');
+break;
+case $frmkode == 'frmfss482' :
+	$itemhead = array('alldamage_remove_no' , 'alldamage_remove_yes' , 'app1' , 'app2' , 'app3' , 'buyer' , 'cardboard_floor_no' , 'cardboard_floor_yes' , 'ceiling_no' , 'ceiling_yes' , 'cleanup_productspill_no' , 'cleanup_productspill_yes' , 'code_sticker_ctnbox' , 'code_sticker_indv'  , 'container_no' , 'docno' , 'door_no' , 'door_yes' , 'free_of_anyoffsmell_no' , 'free_of_anyoffsmell_yes' , 'free_of_cracks_no' , 'free_of_cracks_yes' , 'free_of_pest_no' , 'free_of_pest_yes' , 'hinges_no' , 'hinges_yes' ,  'instruction_ppic_revision' , 'overall_cleanliness' , 'po_no' , 'product ', 'product_id' , 'product_neat_clean_no' , 'product_neat_clean_yes' , 'revisi' , 'seal_number' , 'seals_applied_no' , 'seals_applied_yes' , 'shipment' , 'splinters_nails_no' , 'splinters_nails_yes' , 'stacked_correctly_no' , 'stacked_correctly_yes' ,  'sticker_on_individual_no' , 'sticker_on_individual_yes' , 'sticker_on_outer_no' , 'sticker_on_outer_yes' , 'stuffing_date' , 'stuffing_time' , 'tanggal' , 'temp_setting' , 'wall_no' , 'wall_yes' , 'wood_packaging_no' , 'wood_packaging_yes');
+break;
+case $frmkode == 'frmfss495' :
+	$itemhead = array('app1' , 'app2' , 'app3' , 'checkbox1' , 'checkbox2' , 'checkbox3' , 'checkbox4' , 'checkbox5' , 'checkbox6'  , 'date' , 'id_produk' ,  'no_header' , 'number' , 'produk_date' , 'quantity' , 'rev');
+break;
+case $frmkode == 'frmfss499' :
+	$itemhead = array('app1_by' , 'app1_date' , 'app1_posisi' , 'app1_status' , 'app2_by' , 'app2_date' , 'app2_posisi' , 'app2_status' , 'app3_by' , 'app3_date' , 'app3_posisi' , 'app3_status' , 'app4_by' , 'app4_date' , 'app4_posisi' , 'app4_status' , 'app5_by' , 'app5_date' , 'app5_posisi' , 'app5_status' , 'area_penyimpanan' , 'code'  , 'document' ,  'jenis_product' , 'line' , 'mfg_date' , 'nama_produk' , 'produk_id' ,  'tanggal');
+break;
+case $frmkode == 'frmfss529' :
+	$itemhead = array('app1' , 'app2' , 'app3'  , 'docno' , 'tanggal' , 'tgl_produksi' , 'varian_produk');
+break;
+case $frmkode == 'frmfss530' :
+	$itemhead = array('app1' , 'app2' , 'app3'  , 'docno' , 'filler' ,  'kategori_produk' , 'kategori_produk_2' , 'no_formula' ,  'tanggal' , 'tgl_analis' , 'tgl_expired' , 'tgl_produksi' , 'varian_produk');
+break;
+/*case $frmkode == 'frmfss582' : 
+    $itemhead = array('dokumen' , 'expiry_date' ,  'prod_date' , 'product_id');
+break;*/
+case $frmkode == 'frmhcc003' :
+	$itemhead = array('app1' , 'app2' , 'app3' , 'app4' , 'app5'  , 'dokumen' ,  'nama_produk' ,  'sterilizer' ,'tanggal' , 'tanggal_produksi');
+break;
+case $frmkode == 'frmhcp003' :
+	$itemhead = array('app1'  ,  'no_doc ',  'tgl_doc');
+break;
+case $frmkode == 'frmlqs017' :
+	$itemhead = array('app1' , 'app2' , 'app3' , 'bulan ' , 'create_date' , 'dok ', 'jenis_contoh ', 'lab' , 'param_uji_1' , 'param_uji_2' , 'param_uji_3' , 'param_uji_4' , 'param_uji_5' , 'param_uji_6' ,  'tahun');
+break;
+case $frmkode == 'frmlqs018' :
+	$itemhead = array('app1' , 'app2'  , 'create_date' , 'docno' ,  'jns_produk' , 'lab' , 'parameter1' , 'parameter2' , 'parameter3' , 'parameter4' , 'parameter5' , 'parameter6' , 'parameter7' , 'rev');
+break;
+case $frmkode == 'frmlqs030' :
+	$itemhead = array('bulan'  , 'docno' , ' kode_alat' , 'laboratorium' , 'lokasi' , 'nama_alat' , 'perbaikan' ,  'tanggal');
+break;
+case $frmkode == 'frmlqs037' :
+	$itemhead = array('app1'  , 'docno' ,   'tgl_uji');
+break;
+case $frmkode == 'frmlqs039' :
+	$itemhead = array('bln_tahun'  , 'create_date' , 'cwb_keterangan' , 'departemen' , 'filler' , 'ice_keterangan' ,  'jc_keterangan' , 'jenis_contoh' , 'jenis_produk' ,' jenis_produk2' , 'jp_keterangan' ,  'suhu' , 'tgl_produksi' , 'varian_produk');
+break;
+case $frmkode == 'frmlqs077' :
+	$itemhead = array('app1' , 'app2' , 'app3'  , 'dokumen' ,  'jenis_produk' , 'jns_produk' ,' jns_produk2' , 'nm_dokumen' ,  'tgl_data' , 'tipe_contoh' , 'varian_produk');
+break;
+case $frmkode == 'frmlqs079' :
+	$itemhead = array('bulan_tahun'  , 'create_date' , 'dok' , 'jam_mulai' , 'jam_selesai' ,' minggu_ke');
+break;
+case $frmkode == 'frmlqs094' :
+	$itemhead = array('app1_by' ,'app1_date ',' app1_jab ', 'app2_by' ,' app2_date' , 'app2_jab' , 'app3_by' , 'app3_date' , 'app3_jab'  , 'docno' , ' jns_kerusakan' , 'jumlah' , 'kode_alat' , 'nama_alat' , 'nm_ala' , 'nm_dagang' , 'no_lot' , 'no_seri' ,  'tanggal');
+break;
+case $frmkode == 'frmlqs095' :
+	$itemhead = array('app1' , 'app2' , 'app3'  , 'create_date' ,' docno ', ' laboratorium' , 'revisi' , ' tanggal');
+break;
+case $frmkode == 'frmlqs096' :
+	$itemhead = array('app1' , 'app2' , 'app3'  , 'docno' ,  'laboratorium' , ' tanggal');
+break;
+case $frmkode == 'frmlqs112' :
+	$itemhead = array('app1' , 'app2'  , 'create_date' , 'docno' ,  'jns_produk' , 'lab' , 'parameter1' , 'parameter2' , 'parameter3' , 'parameter4' ,' parameter5 ', 'parameter6 ',' parameter7' ,' rev');
+break;
+case $frmkode == 'frmlqs123' :
+	$itemhead = array('app1' , 'app2'  , 'create_date' , 'docno' ,  'jns_peralatan' , 'lab' , 'parameter1' , 'parameter10' , 'parameter11' , 'parameter12' , 'parameter13' , 'parameter14' , 'parameter15' , 'parameter2' ,' parameter3' , 'parameter4' , 'parameter5' , 'parameter6' , 'parameter7' ,' parameter8' , 'parameter9' , 'rev');
+break;
+case $frmkode == 'frmlqs136' :
+	$itemhead = array('acreditation' , 'address' , 'app1'  , 'condition' , 'contractor' , 'create_date' , 'date_analysis' , 'date_received ', 'date_report' , 'fax' ,  'nodoc' , 'option_address' , 'principle_dept' , 'principle_name' , 'qty_sampel' ,  'tested' , 'tipe_contoh');
+break;
+case $frmkode == 'frmlqs137' :
+	$itemhead = array('acreditation' ,' address' ,'app1'  , 'condition' , 'contractor' , 'create_date' , 'date_analysis' , 'date_received' , 'date_report' , 'description' ,'fax' ,  'jns_produk' , 'jns_produk_2' , 'nodoc' , 'option_address' , 'principle_dept' , 'principle_name' , 'qty_sampel' , 'shipment' ,  'tasted' , 'tipe_contoh' , 'vessel');
+break;
+case $frmkode == 'frmlqs139' :
+	$itemhead = array('app1' , 'app2'  , 'create_date' , 'doc' ,  'revisi');
+break;
+/*case $frmkode == 'frmlqs143' :
+   $itemhead = array('');
+break;*/
+case $frmkode == 'frmlqs154' :
+	$itemhead = array('app1_date' , 'pp1_jab' , 'app1_name' , 'app2_date' , 'app2_jab' , 'app2_name' , 'app3_date' , 'app3_jab' ,' app3_name'  ,' create_date' , 'departemen' , 'doc' , ' lab');
+break;
+case $frmkode == 'frmlqs180' : , 'dokumen' , 'revisi' ,  'tanggal' , 'tgl_laporan');
+break;
+case $frmkode == 'frmlqs216' :
+	$itemhead = array('app1' , 'app2' , 'bulan'  , 'create_date' ,  'jenis_contoh' ,  'tahun' , 'tgl_antar' , 'tindakan_contoh');
+break;
+case $frmkode == 'frmnon004' :
+	$itemhead = array('app1' , 'app2' , 'app3' , 'app4'  , 'dokumen' ,   'tgl_dok');
+break;
+case $frmkode == 'frmnon006' :
+	$itemhead = array('agno_n'  , 'dok' , 'edta_m' , 'hcl_n' ,  'kio3_m' ,' naoh_ml ',  'tanggal');
+break;
+/*case $frmkode == 'frmnon060' :
+   $itemhead = array('');
+break;*/
+case $frmkode == 'frmnon077' : , 'create_date' , 'dtbulan' ,' dttahun' , 'filler' , ' jenis_produk' , 'nm_jns_produk' ,  'suhu' ,' tgl_antar' ,' tgl_produksi' , 'varian_produk');
+break;
+case $frmkode == 'frmnon078' :
+	$itemhead = array('bln_tahun'  , 'create_date' , 'cwb_keterangan' , 'departemen' , 'filler' , 'ice_keterangan' ,  'jc_keterangan' , 'jenis_contoh' , 'jenis_produk' , 'jenis_produk2 ', 'jp_keterangan' ,  'suhu' , 'tgl_antar' , 'varian_produk');
+break;
+/*case $frmkode == 'frmnon087' :
+   $itemhead = array('');
+break;
+case $frmkode == 'frmnon090' :
+	$itemhead = array('app1' , 'app2' , 'app3_by' , 'app3_date' , 'app3_postion' , 'app3_status'  , 'dokumen' ,   'tanggal');
+break;*/
+/*case $frmkode == 'intqad005' :
+	$itemhead = array('app1' , 'app2' , 'app3' , 'berat_stabilizer' ,' disposisi_qa ', 'fc_after' , 'fc_before' , 'formula' , 'jam_blending ', 'jam_release' , 'jam_sampling' , 'odour' , 'ph' , 'production_date' ,  'tanki' , 'tanki_no' , 'tanki_qad' , 'visco_after' , 'volume_after' , 'volume_air' , 'volume_before' , 'vtis');
+break;*/
+case $frmkode == 'intqad010' :
+	$itemhead = array('app1_by' , 'app1_date' , 'app1_posisi' , 'app1_status ',' app2_by' , 'app2_date' , 'app2_posisi' ,' app2_status' , 'app3_by' , 'app3_date' , 'app3_posisi' , 'app3_status' ,' app4_by' , 'app4_date' , 'app4_posisi' , 'app4_status' , 'app5_by' , 'app5_date' , 'app5_posisi' , 'app5_status'  , 'create_date' , 'dept ', 'doc' , ' line ',  'tglproduksi');
+break;
+case $frmkode == 'intqad015' :
+	$itemhead = array('app1' , 'app2' , 'app3'  , 'reate_date' , 'doc' ,  'kode_alat' , 'nm_alat' ,' rev' , ' tanggal');
+break;
+case $frmkode == 'intqad018' :
+	$itemhead = array('app1' , 'app2' , 'app3'  , 'create_date' , 'dtbulan' , 'dtdoc' , 'dtket' , 'dtsuhu' , 'dttahun' ,  'jenis_produk' , 'jenis_produk2' , 'lokasi' , ' tipe_contoh');
+break;
+case $frmkode == 'intqad053' :
+	$itemhead = array('app1' , 'app2' , 'app3' , 'app4'  ,  'line' , 'production_date');
+break;
+case $frmkode == 'intqad055' :
+	$itemhead = array('app1' , 'bulan_tahun'  , 'create_date' , 'dok' , 'kode_ala't , 'laboratorium' , 'nama_alat' , ' tahun' ,' tanggal');
+break;
+case $frmkode == 'intqad059' :
+	$itemhead = array('batas_ph' , 'bulan'  , 'create_date' , 'diketahui_oleh' ,  'nama_media' ,  'tahun');
+break;
+case $frmkode == 'intqad062' :
+	$itemhead = array('bulan'  ,' create_date' , 'doc' ,  'kode_alat' , 'nama_alat' , ' tahun ', 'tgl_inkubasi');
+break;
+case $frmkode == 'intqad063' : 
+     $itemhead = array('dsr_shift1a_day1' ,'dsr_shift1a_day2' , 'dsr_shift1a_day3' , 'dsr_shift1a_day4' ,' dsr_shift1a_day5' , 'dsr_shift1a_day6' , 'dsr_shift2b_day1' , 'dsr_shift2b_day2' , 'dsr_shift2b_day3' , 'dsr_shift2b_day4' , 'dsr_shift2b_day5' , 'dsr_shift2b_day6' , 'dsr_shift3c_day1' , 'dsr_shift3c_day2' , 'dsr_shift3c_day3' , 'dsr_shift3c_day4' ,' dsr_shift3c_day5' , 'dsr_shift3c_day6' ,' dtr_shift1a_day1' , 'dtr_shift1a_day2' , 'dtr_shift1a_day3' , 'dtr_shift1a_day4' , 'dtr_shift1a_day5' , 'dtr_shift1a_day6' , 'dtr_shift2b_day1' , 'dtr_shift2b_day2' , 'dtr_shift2b_day3' , 'dtr_shift2b_day4' , 'dtr_shift2b_day5' , 'dtr_shift2b_day6' , 'dtr_shift3c_day1' , 'dtr_shift3c_day2' , 'dtr_shift3c_day3' , 'dtr_shift3c_day4' , 'dtr_shift3c_day5' ,'dtr_shift3c_day6' ,  'jamsrtr_shift1a_day1' , 'jamsrtr_shift1a_day2' , 'jamsrtr_shift1a_day3' , 'jamsrtr_shift1a_day4' , 'jamsrtr_shift1a_day5' , 'jamsrtr_shift1a_day6' , 'jamsrtr_shift2b_day1' , 'jamsrtr_shift2b_day2' , 'jamsrtr_shift2b_day3' , 'jamsrtr_shift2b_day4' , 'jamsrtr_shift2b_day5' , 'jamsrtr_shift2b_day6' , 'jamsrtr_shift3c_day1' , 'jamsrtr_shift3c_day2' , 'jamsrtr_shift3c_day3' , 'jamsrtr_shift3c_day4' , 'jamsrtr_shift3c_day5' , 'jamsrtr_shift3c_day6' , 'tgl_laporan');
+break;
+case $frmkode == 'intqad065' :
+	$itemhead = array('app1' , 'app2' , 'app3' , 'app4' , 'app5'  ,' date' , ' no' , 'rev' ,  'tgl_laporan');
+break;
+case $frmkode == 'intqad066' : 
+    $itemhead = array('Lokasi Sampling' ,  'Tanggal Sampling');
+break;
+case $frmkode == 'intqad067' :
+	$itemhead = array('Bulan'  , 'Doc No' ,  'Kode Alat' , 'Laboratorium' , 'Nama Alat' ,' Spesifikasi ', 'Tahun' , 'Tanggal Checklist');
+break;
+case $frmkode == 'intqad070' : 
+     $itemhead = array('doc' ,  'kode_alat' , 'kode_hepa ', 'kode_lampu' , 'nama_alat' ,  'tanggal_laporan' , 'total_pakai_1' , 'total_pakai_2 ', 'total_pakai_3' , 'total_pakai_4');
+break;
+case $frmkode == 'intqad075' :
+	$itemhead = array('bln_1' , 'bln_2' , 'bln_3' , 'bln_4' , 'bln_5' , 'ln_6'  , 'reate_date' ,  'jab_1' , 'jab_2' , 'jab_3' , 'jab_4' , 'jab_5' , 'jab_6' , 'kode_alat' , 'lokasi' ,' nama_alat ', 'paraf_1' ,' paraf_2' , 'paraf_3' ,' paraf_4' ,'paraf_5' , 'paraf_6' , 'pemeriksa_1' , 'pemeriksa_2' , 'pemeriksa_3' , 'pemeriksa_4' , 'pemeriksa_5' , 'meriksa_6' , 'range_suhu' ,  'ahun');
+break;
+case $frmkode == 'intqad079' :
+	$itemhead = array('app1 ', 'app2' , 'bulan'  ,  'kode_alat' , 'nm_alat' ,  'tahun' , 'tgl_laporan');
+break;
+case $frmkode == 'intqad097' :
+	$itemhead = array('app1' , 'bulan ' ,  'jam_a' , 'jam_b' , 'jam_c' , 'minggu_ke' , 'revision' ,' shift ', 'shift_a ', 'shift_b' , 'shift_c' ,  'tahun' , 'tempat_sampel' , 'tgl_sampling');
+break;
+case $frmkode == 'intqad098' :
+	$itemhead = array('bulan_tahun'  , 'create_date' , 'dokumen' ,  'kode_alat' , 'nama_alat');
+break;
+case $frmkode == 'intqad099' :
+	$itemhead = array('app1' , 'app2' , 'bulan'  , 'create_date' ,  'ruang' ,  'tahun');
+break;
+case $frmkode == 'intqad114' :
+	$itemhead = array('app1' , 'app2' , 'app3' ,'bln_tahun' ); 
+break;
+case $frmkode == 'intqad118' :
+	$itemhead = array('app1' ,' app2 ' ,' dok' ,  'kode_alat' , 'nm_alat' , 'rev ', ' tanggal');
+break;
+case $frmkode == 'intqad119' :
+	$itemhead = array('app1' ,' app2' , 'bulan'  ,  'jam_sampling_a' , 'jam_sampling_b' , 'jam_sampling_c' , 'shift' , ' tahun' , 'tgl_sampling');
+break;
+case $frmkode == 'intqad129' :
+	$itemhead = array('app1' , 'bulan'  , 'docno' ,  'kode_alat' , 'nm_alat' , 'tahun' , 'tanggal');
+break;
+case $frmkode == 'intqad140' :
+	$itemhead = array('bulan'  ,' create_date' ,'doc' ,  'kode_alat' ,' nama_alat' ,  'tahun');
+break;
+case $frmkode == 'intqad157' : 
+    $itemhead = array('Doc' , 'Tanggal' ,'Lab Pengujian');
+    $itemhead = array('dokumen' , 'jam_shift1' ,' jam_shift2' , 'jam_shift3' , 'lab_penguji' ,  'tambahan1' , 'tambahan2' ,' tambahan3' , 'tanggal');
+break;
+case $frmkode == 'intqad167' : 
+     $itemhead = array('Tanggal Pembuatan Laporan' ,  'Tahun / Bulan' , 'Laboratorium','Diperiksa Oleh');
+     $itemhead = array('tanggal_laporan', 'tahun_bulan', 'lab_penguji');
+break;
+default:
+break;
+
+}	

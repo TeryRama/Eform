@@ -1,0 +1,505 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"iki",
+				"ikispek\tabc"
+			],
+			[
+				"Su",
+				"Sulfite\t(V_formfrmqad002_01.php)"
+			],
+			[
+				"vdt_spek_c",
+				"vdt_spek_chloride\tabc"
+			],
+			[
+				"spac",
+				"spec_minimal_b\tabc"
+			],
+			[
+				"fc",
+				"fc_hasil\tabc"
+			],
+			[
+				"ndt_vt",
+				"ndt_vt_spek_fc\tabc"
+			],
+			[
+				"chloride_",
+				"chloride_hasil\tabc"
+			],
+			[
+				"In",
+				"In-Process\tabc"
+			],
+			[
+				"arr__spek_ph",
+				"arr_ab_spek_ph"
+			],
+			[
+				"fc_",
+				"fc_oven\tabc"
+			],
+			[
+				"orde",
+				"ORDER"
+			],
+			[
+				"Join",
+				"JOIN\tabc"
+			],
+			[
+				"id",
+				"id_company\tabc"
+			],
+			[
+				"opt_",
+				"opt_divisi\tabc"
+			],
+			[
+				"join",
+				"JOIN"
+			],
+			[
+				"id_",
+				"id_divisi\tabc"
+			],
+			[
+				"in",
+				"integer\tabc"
+			],
+			[
+				"tbl",
+				"tblmst_divisi\tabc"
+			],
+			[
+				"tblmst",
+				"tblmst_company\tabc"
+			],
+			[
+				"or",
+				"orderby\tabc"
+			],
+			[
+				"nilai_ka",
+				"nilai_kriteria"
+			],
+			[
+				"C_",
+				"C_uraian_nilai\tabc"
+			],
+			[
+				"urai",
+				"uraian_nilai\tabc"
+			],
+			[
+				"ps",
+				"posts\tabc"
+			],
+			[
+				"pos",
+				"posts\tabc"
+			],
+			[
+				"urian",
+				"uraian\tabc"
+			],
+			[
+				"cek_heda",
+				"cek_header\t(M_mst_divisi.php)"
+			],
+			[
+				"urain",
+				"uraian\tabc"
+			],
+			[
+				"tgl",
+				"tgl_efective\t(C_uraian_nilai.php)"
+			],
+			[
+				"tahunb",
+				"tahunberikutnya\t(V_uraian_nilai.php)"
+			],
+			[
+				"tahun",
+				"tahunberikutnya\tabc"
+			],
+			[
+				"dep",
+				"dept_abbr\tabc"
+			],
+			[
+				"M_mst_de",
+				"M_mst_departemen_bagian\tabc"
+			],
+			[
+				"POST",
+				"post"
+			],
+			[
+				"tblmst_",
+				"tblmst_departemen\tabc"
+			],
+			[
+				"this",
+				"this-"
+			],
+			[
+				"tblms",
+				"tblmst_jabatan"
+			],
+			[
+				"Ms",
+				"Mst_divisi"
+			],
+			[
+				"Mst_",
+				"Mst_company"
+			],
+			[
+				"id_ba",
+				"id_bagian"
+			],
+			[
+				"divisi_",
+				"divisi_abbr"
+			],
+			[
+				"company",
+				"company_abbr"
+			],
+			[
+				"compan",
+				"company_abbr"
+			],
+			[
+				"el",
+				"else"
+			],
+			[
+				"jaba",
+				"jabatanname"
+			],
+			[
+				"jabatan",
+				"jabatan"
+			],
+			[
+				"ID",
+				"id_dept"
+			],
+			[
+				"data_opt_",
+				"data_opt_departemen"
+			],
+			[
+				"com",
+				"company"
+			],
+			[
+				"tblmdt",
+				"tblmstsubdepartment"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"paka",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 136.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2deb499853c4371624f5a07e27c334aa' + 'bf8c4e67d14fb0525ba4f89698a6d7e1'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"//192.168.12.4/modul/qa/application/views/laporan/V_laporan_detail_frmcal003_00.php",
+		"//192.168.12.4/modul/qa/application/views/master/V_product_spec.php",
+		"//192.168.12.4/modul/qa/application/views/laporan/V_laporan_detail_frmqad005_00.php",
+		"//192.168.12.4/modul/qa/application/views/laporan/V_laporan_detail_frmqad004_00.php",
+		"//192.168.12.4/modul/qa/application/views/form_input/V_formfrmqad022_00.php",
+		"//192.168.12.4/modul/qa/application/views/form_input/V_formfrmqad021_01.php",
+		"//192.168.12.4/modul/qa/application/views/form_input/V_formfrmqad020_01.php",
+		"//192.168.12.4/modul/qa/application/views/laporan/V_laporan_detail_frmqad020_01.php",
+		"//192.168.12.4/modul/qa/application/controllers/form_input/C_formfrmqad003_00.php",
+		"//192.168.12.4/modul/qa/application/controllers/export_excel/C_export_toexcel_frmqad020_01.php",
+		"//192.168.12.4/modul/qa/application/controllers/export_excel/C_export_toexcel_frmqad027_01.php",
+		"//192.168.12.4/modul/qa/application/controllers/form_input/C_formfrmqad020_01.php",
+		"//192.168.12.4/modul/qa/application/models/form_input/M_formfrmqad020_01.php",
+		"//192.168.12.4/modul/qa/application/controllers/laporan/C_detail_laporan.php",
+		"//192.168.12.4/modul/qa/application/controllers/form_input/C_formfrmqad022_00.php",
+		"//192.168.12.4/modul/qa/application/controllers/export_excel/C_export_toexcel_frmqad020_00.php",
+		"//192.168.12.4/modul/qa/application/views/form_input/V_formfrmqad020_00.php",
+		"//192.168.12.4/modul/qa/application/views/form_input/V_formfrmqad023_00_mtr.php",
+		"//192.168.12.4/modul/qa/application/views/form_input/V_formintqad001_00.php",
+		"//192.168.12.4/modul/qa/application/views/form_input/V_formfrmqad021_00.php",
+		"//192.168.12.4/modul/qa/application/views/form_input/V_formfrmqad040_00.php",
+		"//192.168.12.4/modul/qa/application/views/form_input/V_formfrmqad143_01.php",
+		"//192.168.12.4/modul/qa/application/views/form_input/V_formfrmqad026_02.php",
+		"//192.168.12.4/modul/qa/application/models/form_input/M_formfrmqad026_02.php",
+		"//192.168.12.4/modul/qa/application/controllers/form_input/C_formfrmqad026_02.php",
+		"//192.168.12.4/modul/qa/application/controllers/form_input/C_formfrmqad027_02.php",
+		"//192.168.12.4/modul/qa/application/views/laporan/V_laporan_detail_frmqad026_02.php",
+		"//192.168.12.4/modul/qa/application/controllers/export_excel/C_export_toexcel_frmqad026_02.php",
+		"//192.168.12.4/modul/qa/application/views/form_input/V_formfrmqad001_00.php",
+		"//192.168.12.4/modul/qa/application/views/form_input/V_formfrmqad002_00.php",
+		"//192.168.12.4/modul/qa/application/views/form_input/V_formfrmqad003_00.php",
+		"//192.168.12.4/modul/qa/application/controllers/export_excel/C_export_toexcel_frmqad003_00.php",
+		"//192.168.12.4/modul/qa/application/views/laporan/V_laporan_detail_frmqad003_00.php",
+		"//192.168.12.4/modul/qa/application/views/laporan/V_laporan_detail_frmqad027_02.php",
+		"//192.168.12.4/modul/qa/application/controllers/export_excel/C_export_toexcel_frmqad027_02.php",
+		"//192.168.12.4/modul/qa/application/views/form_input/V_formfrmqad027_02.php",
+		"//192.168.12.4/modul/qa/application/models/form_input/M_formfrmqad027_02.php",
+		"//192.168.12.4/modul/qa/application/models/form_input/M_formfrmqad036_01.php",
+		"//192.168.12.4/modul/qa/application/models/form_input/M_forminput.php",
+		"//192.168.12.4/modul/qa/application/controllers/export_excel/C_export_toexcel_frmqad021_00.php",
+		"//192.168.12.4/modul/qa/application/controllers/laporan/C_export_toexcel.php",
+		"//192.168.12.4/modul/qa/application/controllers/form_input/C_formfrmqad021_01.php",
+		"//192.168.12.4/modul/qa/application/views/laporan/V_laporan_detail_frmqad026_01.php",
+		"//192.168.12.4/modul/qa/application/views/form_input/V_formfrmqad014_00.php",
+		"//192.168.12.4/modul/qa/application/views/form_input/V_formfrmqad026_01.php",
+		"//192.168.12.4/modul/qa/application/views/laporan/V_laporan_detail_frmqad026_00.php",
+		"//192.168.12.4/modul/qa/application/views/form_input/V_formfrmqad026_00.php",
+		"//192.168.12.4/modul/qa/application/models/form_input/M_formfrmqad026_01.php",
+		"//192.168.12.4/modul/qa/application/models/form_input/M_formfrmqad026_00.php",
+		"//192.168.12.4/modul/qa/application/controllers/form_input/C_formfrmqad026_01.php",
+		"//192.168.12.4/modul/qa/application/controllers/form_input/C_formfrmqad021_00.php",
+		"//192.168.12.4/modul/qa/application/controllers/form_input/C_formfrmlqs001_01.php",
+		"//192.168.12.4/modul/qa/application/views/laporan/V_laporan_detail_frmqad011_00.php",
+		"//192.168.12.4/modul/qa/application/views/form_input/V_formfrmqad001_00_labbesar.php",
+		"//192.168.12.4/modul/qa/application/views/laporan/V_laporan_detail_frmqad021_00.php",
+		"//192.168.12.4/modul/qa/application/views/form_input/V_formfrmqad003_01.php",
+		"//192.168.12.4/modul/qa/application/views/form_input/V_formfrmqad017_00.php",
+		"//192.168.12.4/modul/qa/application/controllers/export_excel/C_export_toexcel_frmqad017_00.php",
+		"//192.168.12.4/modul/qa/application/controllers/form_input/C_formfrmqad003_01.php",
+		"//192.168.12.4/modul/qa/application/views/form_input/V_formfrmqad002_01.php",
+		"//192.168.12.4/modul/qa/application/controllers/export_excel/C_export_toexcel_frmqad002_00.php",
+		"//192.168.12.4/modul/qa/application/controllers/form_input/C_formfrmqad002_01.php",
+		"//192.168.12.4/modul/qa/application/controllers/form_input/C_formfrmqad002_00.php",
+		"//192.168.12.4/modul/qa/application/views/laporan/V_laporan_detail_frmqad002_00.php",
+		"//192.168.12.4/modul/qa/application/models/form_input/M_formfrmqad002_01.php",
+		"//192.168.12.4/modul/qa/application/views/form_input/V_formfrmqad016_00.php",
+		"//192.168.12.4/modul/qa/application/controllers/form_input/C_forminput.php",
+		"/C/Users/ITD018/Downloads/Data/VR Eroge yattetara Isekai ni Tensei shita no de, Bishoujo Maou wo Doreika suru Cross Out Saber.rar",
+		"//192.168.12.4/modul/qa/application/views/form_input/V_formfrmqad036_01.php",
+		"//192.168.12.4/modul/qa/application/views/form_input/V_formfrmqad036_00.php",
+		"//192.168.12.4/modul/qa/application/controllers/form_input/C_formfrmqad036_00.php",
+		"//192.168.12.4/modul/qa/application/controllers/form_input/C_formfrmqad036_01.php",
+		"//192.168.12.4/modul/qa/application/views/laporan/V_laporan_detail_frmqad036_00.php",
+		"//192.168.12.4/modul/qa/application/controllers/export_excel/C_export_toexcel_frmqad036_00.php",
+		"//192.168.12.4/modul/qa/application/controllers/export_excel/C_export_toexcel_frmqad011_00.php",
+		"//192.168.12.4/modul/qa/application/views/form_input/V_formfrmqad011_00.php",
+		"//192.168.12.4/modul/qa/application/controllers/export_excel/C_export_toexcel_intqad001_00.php",
+		"//192.168.12.4/modul/qa/application/controllers/export_excel/C_export_toexcel_frmqad016_00.php",
+		"//192.168.12.4/modul/qa/application/views/laporan/V_laporan_detail_frmqad017_00.php",
+		"//192.168.12.4/modul/qa/application/views/laporan/V_laporan_detail_frmqad001_00.php",
+		"//192.168.12.4/modul/qa/application/controllers/export_excel/C_export_toexcel_frmqad001_00.php",
+		"//192.168.12.4/modul/qa/application/views/form_input/V_formfrmqad001_00_labmini.php",
+		"//192.168.12.4/modul/qa/application/views/form_input/V_formfrmnip001_00.php",
+		"//192.168.12.4/modul/qa/application/views/form_input/V_formfrmqad001_01.php",
+		"//192.168.12.4/modul/qa/application/controllers/form_input/C_formintqad001_00.php",
+		"//192.168.12.4/modul/qa/application/controllers/form_input/C_formfrmqad017_00.php",
+		"//192.168.12.4/modul/qa/application/views/laporan/V_laporan_detail_frmqad016_00.php",
+		"//192.168.12.4/modul/qa/application/views/laporan/V_laporan_detail_intqad001_00.php",
+		"//192.168.12.4/modul/qa/application/views/laporan/V_laporan_detail_frmcal002_00.php",
+		"//192.168.12.4/modul/qa/application/views/form_input/V_formfrmqad011_01.php",
+		"//192.168.12.4/modul/qa/application/controllers/form_input/C_formfrmqad011_01.php",
+		"//192.168.12.4/modul/qa/application/controllers/form_input/C_formfrmqad011_00.php",
+		"//192.168.12.4/modul/qa/application/controllers/tambahan/file/C_tambahan.php",
+		"//192.168.12.4/modul/qa/application/libraries/PHPExcel/Classes/PHPExcel/Style/Fill.php",
+		"//192.168.12.4/modul/qa/application/libraries/PHPExcel/Classes/PHPExcel/Style.php",
+		"//192.168.12.4/modul/qa/application/libraries/PHPExcel/Classes/PHPExcel/Cell.php",
+		"//192.168.12.4/modul/qa/application/libraries/PHPExcel/Classes/PHPExcel/Exception.php",
+		"/C/Users/ITD018/Documents/My Received Files/ITD - Ersyad/ererer.php",
+		"//192.168.12.4/modul/qa/application/controllers/form_input/C_formfrmqad001_00.php",
+		"//192.168.12.4/modul/qa/application/controllers/form_input/C_formfrmqad016_01.php",
+		"//192.168.12.4/modul/qa/application/models/form_input/M_formfrmqad016_01.php",
+		"//192.168.12.4/modul/qa/application/models/form_input/M_formfrmqad016_00.php",
+		"//192.168.12.4/modul/qa/application/views/form_input/V_formfrmqad016_01.php",
+		"//192.168.12.4/modul/qa/application/controllers/form_input/C_formfrmqad016_00.php",
+		"//192.168.12.4/modul/qa/application/config/config.php",
+		"//192.168.12.4/modul/qa/application/views/form_input/V_formfrmlqs001_01.php",
+		"/X/qa/application/controllers/form_input/C_formintqad001_00.php",
+		"/X/qa/application/controllers/form_input/C_formintqad001_01.php",
+		"/X/qa/application/models/form_input/M_formintqad001_01.php",
+		"/X/qa/application/views/form_input/V_formintqad001_00.php",
+		"/X/qa/application/views/form_input/V_formfrmqad011_01.php",
+		"/X/qa/application/views/form_input/V_formfrmqad036_00.php",
+		"/X/qa/application/views/form_input/V_formfrmqad011_00.php",
+		"/X/qa/application/views/form_input/V_formfrmqad001_00.php",
+		"/X/qa/application/views/form_input/V_formintqad001_01.php",
+		"/X/qa/application/views/form_input/V_formfrmqad002_00.php",
+		"/X/qa/application/views/form_input/V_formfrmqad022_00.php",
+		"/X/qa/application/views/form_input/V_formfrmqad017_00.php",
+		"/X/qa/application/views/form_input/V_formfrmqad017_01.php",
+		"/X/qa/application/views/form_input/V_formfrmqad036_01.php",
+		"/X/qa/application/models/form_input/M_formfrmqad036_01.php",
+		"/X/qa/application/controllers/form_input/C_formfrmqad036_01.php",
+		"/X/qa/application/controllers/form_input/C_formfrmqad011_01.php",
+		"/X/qa/application/controllers/form_input/C_formfrmqad016_01.php",
+		"/X/qa/application/views/form_input/V_formfrmqad016_01.php",
+		"/X/qa/application/models/form_input/M_formfrmqad016_01.php",
+		"/X/qa/application/models/form_input/M_formfrmqad036_00.php",
+		"/X/qa/application/views/form_input/V_formintqad012_00.php"
+	],
+	"find":
+	{
+		"height": 39.0
+	},
+	"find_in_files":
+	{
+		"height": 130.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 24.0
+	},
+	"input":
+	{
+		"height": 58.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "qa.sublime-project",
+	"replace":
+	{
+		"height": 44.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 592.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 311.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

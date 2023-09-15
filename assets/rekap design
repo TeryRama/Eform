@@ -1,0 +1,965 @@
+WITH table_tanggal AS (
+         SELECT tgl_sampling.tgl_sampling::date AS tgl_sampling
+           FROM generate_series((( SELECT min(tblfrmintqad066hdr.tgl_sampling) AS min
+                   FROM tblfrmintqad066hdr))::timestamp with time zone, (( SELECT max(tblfrmintqad066hdr.tgl_sampling) AS max
+                   FROM tblfrmintqad066hdr))::timestamp with time zone, '1 day'::interval) tgl_sampling(tgl_sampling)
+        ), table066 AS (
+         SELECT a.tgl_sampling, a.lokasi_sampling, b.detail_id, b.sampling_point, b.jns_sampling, b.no_lab,
+            b.area, b.sampling_tgl, b.sampling_jam, b.sampling_analis, b.shift, b.dianalisa_oleh,
+            b.ha_tpc, b.ha_entero, b.ha_ecoli_gas, b.ha_ecoli_indol, b.ha_salmonella_he,
+            b.ha_salmonella_xld, b.ha_salmonella_bsa, b.dilaporkan_oleh, b.dilaporkan_tgl, 
+            b.remarks, b.operator, b.operator2
+           FROM tblfrmintqad066hdr a
+      JOIN tblfrmintqad066dtl b ON a.headerid = b.headerid
+        ),
+        ResultTable AS (
+ SELECT table_tanggal.tgl_sampling, table066.jns_sampling,
+    table066.sampling_point, table066.shift, 
+    table066.operator, table066.ha_tpc, table066.operator2, table066.ha_entero,  
+    table066.ha_ecoli_gas, table066.ha_salmonella_he, table066.remarks, 
+
+        -- Person of Filling Room
+        CASE
+            WHEN table066.sampling_point ~* '.*(fr).*' AND table066.jns_sampling = 'Personil' THEN table066.sampling_point
+        END AS fr_name, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(fr).*' AND table066.jns_sampling = 'Personil' THEN table066.ha_tpc
+        END AS fr_tpc, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(fr).*' AND table066.jns_sampling = 'Personil' THEN table066.ha_entero
+        END AS fr_entero, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(fr).*' AND table066.jns_sampling = 'Personil' THEN table066.ha_ecoli_gas
+        END AS fr_ecoli, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(fr).*' AND table066.jns_sampling = 'Personil' THEN table066.ha_salmonella_he
+        END AS fr_salmo,
+
+        -- Person of Filling Room Operator
+        CASE
+            WHEN table066.sampling_point ~* '.*(fr).*' AND table066.jns_sampling = 'Personil' THEN table066.operator2
+        END AS fr_operator2, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(fr).*' AND table066.jns_sampling = 'Personil' THEN table066.operator
+        END AS fr_operator, 
+
+
+        -- Person of Cooling/Packing Room
+        CASE
+            WHEN (table066.sampling_point ~* '.*(P1).*' OR table066.sampling_point ~* '.*(P2).*') AND table066.jns_sampling = 'Personil' THEN table066.sampling_point
+        END AS cooling_name, 
+        CASE
+            WHEN (table066.sampling_point ~* '.*(P1).*' OR table066.sampling_point ~* '.*(P2).*') AND table066.jns_sampling = 'Personil' THEN table066.ha_tpc
+        END AS cooling_tpc, 
+        CASE
+            WHEN (table066.sampling_point ~* '.*(P1).*' OR table066.sampling_point ~* '.*(P2).*') AND table066.jns_sampling = 'Personil' THEN table066.ha_entero
+        END AS cooling_entero, 
+        CASE
+            WHEN (table066.sampling_point ~* '.*(P1).*' OR table066.sampling_point ~* '.*(P2).*') AND table066.jns_sampling = 'Personil' THEN table066.ha_ecoli_gas
+        END AS cooling_ecoli, 
+        CASE
+            WHEN (table066.sampling_point ~* '.*(P1).*' OR table066.sampling_point ~* '.*(P2).*') AND table066.jns_sampling = 'Personil' THEN table066.ha_salmonella_he
+        END AS cooling_salmo,
+
+        -- Person of Cooling/Packing Room Operator
+        CASE
+            WHEN (table066.sampling_point ~* '.*(P1).*' OR table066.sampling_point ~* '.*(P2).*') AND table066.jns_sampling = 'Personil' THEN table066.operator2
+        END AS cooling_operator2, 
+        CASE
+            WHEN (table066.sampling_point ~* '.*(P1).*' OR table066.sampling_point ~* '.*(P2).*') AND table066.jns_sampling = 'Personil' THEN table066.operator
+        END AS cooling_operator, 
+
+        -- Person of HPM
+        CASE
+            WHEN table066.sampling_point ~* '.*(flex).*' AND table066.jns_sampling = 'Personil' THEN table066.sampling_point
+        END AS hpm_name, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(flex).*' AND table066.jns_sampling = 'Personil' THEN table066.ha_tpc
+        END AS hpm_tpc, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(flex).*' AND table066.jns_sampling = 'Personil' THEN table066.ha_entero
+        END AS hpm_entero, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(flex).*' AND table066.jns_sampling = 'Personil' THEN table066.ha_ecoli_gas
+        END AS hpm_ecoli, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(flex).*' AND table066.jns_sampling = 'Personil' THEN table066.ha_salmonella_he
+        END AS hpm_salmo,
+
+        -- Person of HPM Operator
+        CASE
+            WHEN table066.sampling_point ~* '.*(flex).*' AND table066.jns_sampling = 'Personil' THEN table066.operator2
+        END AS hpm_operator2, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(flex).*' AND table066.jns_sampling = 'Personil' THEN table066.operator
+        END AS hpm_operator, 
+
+        -- Person of Fluidizer
+        CASE
+            WHEN table066.sampling_point ~* '.*(fdr).*' AND table066.jns_sampling = 'Personil' THEN table066.sampling_point
+        END AS fluid_name,
+        CASE
+            WHEN table066.sampling_point ~* '.*(fdr).*' AND table066.jns_sampling = 'Personil' THEN table066.ha_tpc
+        END AS fluid_tpc, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(fdr).*' AND table066.jns_sampling = 'Personil' THEN table066.ha_entero
+        END AS fluid_entero, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(fdr).*' AND table066.jns_sampling = 'Personil' THEN table066.ha_ecoli_gas
+        END AS fluid_ecoli, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(fdr).*' AND table066.jns_sampling = 'Personil' THEN table066.ha_salmonella_he
+        END AS fluid_salmo,
+
+        -- Person of Fluidizer Operator
+        CASE
+            WHEN table066.sampling_point ~* '.*(fdr).*' AND table066.jns_sampling = 'Personil' THEN table066.operator2
+        END AS fluid_operator2, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(fdr).*' AND table066.jns_sampling = 'Personil' THEN table066.operator
+        END AS fluid_operator, 
+
+        -- Person of WPM
+        CASE
+            WHEN table066.sampling_point ~* '.*(qa).*' AND table066.jns_sampling = 'Personil' THEN table066.sampling_point
+        END AS wpm_name,
+        CASE
+            WHEN table066.sampling_point ~* '.*(qa).*' AND table066.jns_sampling = 'Personil' THEN table066.ha_tpc
+        END AS wpm_tpc, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(qa).*' AND table066.jns_sampling = 'Personil' THEN table066.ha_entero
+        END AS wpm_entero, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(qa).*' AND table066.jns_sampling = 'Personil' THEN table066.ha_ecoli_gas
+        END AS wpm_ecoli, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(qa).*' AND table066.jns_sampling = 'Personil' THEN table066.ha_salmonella_he
+        END AS wpm_salmo,
+
+        -- Person of WPM Operator
+        CASE
+            WHEN table066.sampling_point ~* '.*(qa).*' AND table066.jns_sampling = 'Personil' THEN table066.operator2
+        END AS wpm_operator2, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(qa).*' AND table066.jns_sampling = 'Personil' THEN table066.operator
+        END AS wpm_operator, 
+
+        -- Control Swab
+        CASE
+            WHEN (table066.sampling_point ~* '.*(sponge).*' OR table066.sampling_point ~* '.*(spons).*') AND table066.jns_sampling = 'Equipment' THEN table066.ha_tpc
+        END AS control_tpc, 
+        CASE
+            WHEN (table066.sampling_point ~* '.*(sponge).*' OR table066.sampling_point ~* '.*(spons).*') AND table066.jns_sampling = 'Equipment' THEN table066.ha_entero
+        END AS control_entero, 
+        CASE
+            WHEN (table066.sampling_point ~* '.*(sponge).*' OR table066.sampling_point ~* '.*(spons).*') AND table066.jns_sampling = 'Equipment' THEN table066.ha_ecoli_gas
+        END AS control_ecoli, 
+        CASE
+            WHEN (table066.sampling_point ~* '.*(sponge).*' OR table066.sampling_point ~* '.*(spons).*') AND table066.jns_sampling = 'Equipment' THEN table066.ha_salmonella_he
+        END AS control_salmo,
+
+        -- Control Swab Operator
+        CASE
+            WHEN (table066.sampling_point ~* '.*(sponge).*' OR table066.sampling_point ~* '.*(spons).*') AND table066.jns_sampling = 'Personil' THEN table066.operator2
+        END AS control_operator2, 
+        CASE
+            WHEN (table066.sampling_point ~* '.*(sponge).*' OR table066.sampling_point ~* '.*(spons).*') AND table066.jns_sampling = 'Personil' THEN table066.operator
+        END AS control_operator
+
+   FROM table_tanggal
+   FULL JOIN table066 ON table_tanggal.tgl_sampling = table066.tgl_sampling
+  WHERE table066.lokasi_sampling = 'CMP')
+  select tgl_sampling,
+    max(jns_sampling) as jns_sampling ,
+    max(sampling_point) as sampling_point, 
+    max(shift) as shift, 
+    max(operator2) as operator2,
+    max(ha_tpc) as ha_tpc, 
+    max(operator) as operator,
+    max(ha_entero) as   ha_entero,
+
+    max(fr_name) as fr_name,
+    max(fr_tpc) as fr_tpc,
+    max(fr_entero) as fr_entero,
+    max(fr_ecoli) as fr_ecoli,
+    max(fr_salmo) as fr_salmo,
+    max( fr_operator) as  fr_operator,
+    max( fr_operator2) as  fr_operator2,
+
+    max(cooling_name) as cooling_name,
+    max(cooling_tpc) as cooling_tpc,
+    max(cooling_entero) as cooling_entero,
+    max(cooling_ecoli) as cooling_ecoli,
+    max(cooling_salmo) as cooling_salmo,
+    max( cooling_operator) as  cooling_operator,
+    max( cooling_operator2) as  cooling_operator2,
+
+    max(hpm_name) as hpm_name,
+    max(hpm_tpc) as hpm_tpc,
+    max(hpm_entero) as hpm_entero,
+    max(hpm_ecoli) as hpm_ecoli,
+    max(hpm_salmo) as hpm_salmo,
+    max( hpm_operator) as  hpm_operator,
+    max( hpm_operator2) as  hpm_operator2,
+
+    max(fluid_name) as fluid_name,
+    max(fluid_tpc) as fluid_tpc,
+    max( fluid_entero) as  fluid_entero,
+    max( fluid_ecoli) as  fluid_ecoli,
+    max( fluid_salmo) as  fluid_salmo,
+    max( fluid_operator) as  fluid_operator,
+    max( fluid_operator2) as  fluid_operator2,
+
+    max(wpm_name) as wpm_name,
+    max(wpm_tpc) as wpm_tpc,
+    max( wpm_entero) as  wpm_entero,
+    max( wpm_ecoli) as  wpm_ecoli,
+    max( wpm_salmo) as  wpm_salmo,
+    max( wpm_operator) as  wpm_operator,
+    max( wpm_operator2) as  wpm_operator2,
+
+    max(control_tpc) as control_tpc,
+    max( control_entero) as  control_entero,
+    max( control_ecoli) as  control_ecoli,
+    max( control_salmo) as  control_salmo,
+    max( control_operator) as  control_operator,
+    max( control_operator2) as  control_operator2,
+
+    
+    max(resulttable.remarks::text) AS remarks
+    from ResultTable 
+  group by tgl_sampling;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+WITH table_tanggal AS (
+         SELECT tgl_data.tgl_data::date AS tgl_data
+           FROM generate_series((( SELECT min(tblfrmintqad068hdr.tgl_data) AS min
+                   FROM tblfrmintqad068hdr))::timestamp with time zone, (( SELECT max(tblfrmintqad068hdr.tgl_data) AS max
+                   FROM tblfrmintqad068hdr))::timestamp with time zone, '1 day'::interval) tgl_data(tgl_data)
+        ), table068 AS (
+         SELECT a.tgl_data, a.lokasi_sampling, b.detail_id, b.kd_samplingpoint, 
+            b.wkt_sampling, b.analis, b.line, b.shift, b.ha_tpc, b.ha_entero, 
+            b.ha_yeast, b.ha_mould, b.pbc_oleh, b.pbc_tgl, b.keterangan, 
+            b.remarks, b.operator, b.operator2, b.operator3, b.operator4
+           FROM tblfrmintqad068hdr a
+      JOIN tblfrmintqad068dtl b ON a.headerid = b.headerid
+        ),
+ResultTable AS (
+ SELECT table_tanggal.tgl_data, table068.lokasi_sampling, 
+    table068.kd_samplingpoint, table068.shift, table068.operator, 
+    table068.ha_tpc, table068.operator2, table068.ha_entero, table068.operator3, 
+    table068.ha_yeast, table068.operator4, table068.ha_mould, table068.remarks, 
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'FR'::text OR table068.kd_samplingpoint::text ~* 'filling room'::text) THEN table068.ha_tpc
+            ELSE NULL::character varying
+        END AS fr_tpc, 
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'FR'::text OR table068.kd_samplingpoint::text ~* 'filling room'::text) THEN table068.ha_entero
+            ELSE NULL::character varying
+        END AS fr_entero, 
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'FR'::text OR table068.kd_samplingpoint::text ~* 'filling room'::text) THEN table068.ha_yeast
+            ELSE NULL::character varying
+        END AS fr_yeast, 
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'FR'::text OR table068.kd_samplingpoint::text ~* 'filling room'::text) THEN table068.ha_mould
+            ELSE NULL::character varying
+        END AS fr_mould, 
+
+        --  Filling Room Operator
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'FR'::text OR table068.kd_samplingpoint::text ~* 'filling room'::text) THEN table068.operator
+        END AS fr_operator, 
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'FR'::text OR table068.kd_samplingpoint::text ~* 'filling room'::text) THEN table068.operator2
+        END AS fr_operator2,
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'FR'::text OR table068.kd_samplingpoint::text ~* 'filling room'::text) THEN table068.operator3
+        END AS fr_operator3, 
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'FR'::text OR table068.kd_samplingpoint::text ~* 'filling room'::text) THEN table068.operator3
+        END AS fr_operator4,
+
+
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'Cooling'::text OR table068.kd_samplingpoint::text ~* 'cooling room'::text OR table068.kd_samplingpoint::text ~* 'cooling cmp'::text OR table068.kd_samplingpoint::text ~* 'Packing 1 Kg'::text OR table068.kd_samplingpoint::text ~* 'packing 1kg'::text) THEN table068.ha_tpc
+            ELSE NULL::character varying
+        END AS cooling_pack_tpc, 
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'Cooling'::text OR table068.kd_samplingpoint::text ~* 'cooling room'::text OR table068.kd_samplingpoint::text ~* 'cooling cmp'::text OR table068.kd_samplingpoint::text ~* 'Packing 1 Kg'::text OR table068.kd_samplingpoint::text ~* 'packing 1kg'::text) THEN table068.ha_entero
+            ELSE NULL::character varying
+        END AS cooling_pack_entero, 
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'Cooling'::text OR table068.kd_samplingpoint::text ~* 'cooling room'::text OR table068.kd_samplingpoint::text ~* 'cooling cmp'::text OR table068.kd_samplingpoint::text ~* 'Packing 1 Kg'::text OR table068.kd_samplingpoint::text ~* 'packing 1kg'::text) THEN table068.ha_yeast
+            ELSE NULL::character varying
+        END AS cooling_pack_yeast, 
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'Cooling'::text OR table068.kd_samplingpoint::text ~* 'cooling room'::text OR table068.kd_samplingpoint::text ~* 'cooling cmp'::text OR table068.kd_samplingpoint::text ~* 'Packing 1 Kg'::text OR table068.kd_samplingpoint::text ~* 'packing 1kg'::text) THEN table068.ha_mould
+            ELSE NULL::character varying
+        END AS cooling_pack_mould, 
+
+        --  Cooling/Packing Room Operator
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'Cooling'::text OR table068.kd_samplingpoint::text ~* 'cooling room'::text OR table068.kd_samplingpoint::text ~* 'cooling cmp'::text OR table068.kd_samplingpoint::text ~* 'Packing 1 Kg'::text OR table068.kd_samplingpoint::text ~* 'packing 1kg'::text) THEN table068.operator
+        END AS cooling_pack_operator, 
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'Cooling'::text OR table068.kd_samplingpoint::text ~* 'cooling room'::text OR table068.kd_samplingpoint::text ~* 'cooling cmp'::text OR table068.kd_samplingpoint::text ~* 'Packing 1 Kg'::text OR table068.kd_samplingpoint::text ~* 'packing 1kg'::text) THEN table068.operator2
+        END AS cooling_pack_operator2,
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'Cooling'::text OR table068.kd_samplingpoint::text ~* 'cooling room'::text OR table068.kd_samplingpoint::text ~* 'cooling cmp'::text OR table068.kd_samplingpoint::text ~* 'Packing 1 Kg'::text OR table068.kd_samplingpoint::text ~* 'packing 1kg'::text) THEN table068.operator3
+        END AS cooling_pack_operator3, 
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'Cooling'::text OR table068.kd_samplingpoint::text ~* 'cooling room'::text OR table068.kd_samplingpoint::text ~* 'cooling cmp'::text OR table068.kd_samplingpoint::text ~* 'Packing 1 Kg'::text OR table068.kd_samplingpoint::text ~* 'packing 1kg'::text) THEN table068.operator3
+        END AS cooling_pack_operator4,
+
+
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'Ducting'::text OR table068.kd_samplingpoint::text ~* 'DUCTING'::text) THEN table068.ha_tpc
+            ELSE NULL::character varying
+        END AS ducting_tpc, 
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'Ducting'::text OR table068.kd_samplingpoint::text ~* 'DUCTING'::text) THEN table068.ha_entero
+            ELSE NULL::character varying
+        END AS ducting_entero, 
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'Ducting'::text OR table068.kd_samplingpoint::text ~* 'DUCTING'::text) THEN table068.ha_yeast
+            ELSE NULL::character varying
+        END AS ducting_yeast, 
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'Ducting'::text OR table068.kd_samplingpoint::text ~* 'DUCTING'::text) THEN table068.ha_mould
+            ELSE NULL::character varying
+        END AS ducting_mould, 
+
+        --  Ducting Sterile Air Area Operator
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'Ducting'::text OR table068.kd_samplingpoint::text ~* 'DUCTING'::text) THEN table068.operator
+        END AS ducting_operator, 
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'Ducting'::text OR table068.kd_samplingpoint::text ~* 'DUCTING'::text) THEN table068.operator2
+        END AS ducting_operator2,
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'Ducting'::text OR table068.kd_samplingpoint::text ~* 'DUCTING'::text) THEN table068.operator3
+        END AS ducting_operator3, 
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'Ducting'::text OR table068.kd_samplingpoint::text ~* 'DUCTING'::text) THEN table068.operator3
+        END AS ducting_operator4,
+
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'Cooler L2'::text OR table068.kd_samplingpoint::text ~* 'cooler lantai 2'::text OR table068.kd_samplingpoint::text ~* 'cooler cmp l2'::text) THEN table068.ha_tpc
+            ELSE NULL::character varying
+        END AS cooler_tpc, 
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'Cooler L2'::text OR table068.kd_samplingpoint::text ~* 'cooler lantai 2'::text OR table068.kd_samplingpoint::text ~* 'cooler cmp l2'::text) THEN table068.ha_entero
+            ELSE NULL::character varying
+        END AS cooler_entero, 
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'Cooler L2'::text OR table068.kd_samplingpoint::text ~* 'cooler lantai 2'::text OR table068.kd_samplingpoint::text ~* 'cooler cmp l2'::text) THEN table068.ha_yeast
+            ELSE NULL::character varying
+        END AS cooler_yeast, 
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'Cooler L2'::text OR table068.kd_samplingpoint::text ~* 'cooler lantai 2'::text OR table068.kd_samplingpoint::text ~* 'cooler cmp l2'::text) THEN table068.ha_mould
+            ELSE NULL::character varying
+        END AS cooler_mould, 
+
+        --  Cooler Lantai 2  Operator
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'Cooler L2'::text OR table068.kd_samplingpoint::text ~* 'cooler lantai 2'::text OR table068.kd_samplingpoint::text ~* 'cooler cmp l2'::text) THEN table068.operator
+        END AS cooler_operator, 
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'Cooler L2'::text OR table068.kd_samplingpoint::text ~* 'cooler lantai 2'::text OR table068.kd_samplingpoint::text ~* 'cooler cmp l2'::text) THEN table068.operator2
+        END AS cooler_operator2,
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'Cooler L2'::text OR table068.kd_samplingpoint::text ~* 'cooler lantai 2'::text OR table068.kd_samplingpoint::text ~* 'cooler cmp l2'::text) THEN table068.operator3
+        END AS cooler_operator3, 
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'Cooler L2'::text OR table068.kd_samplingpoint::text ~* 'cooler lantai 2'::text OR table068.kd_samplingpoint::text ~* 'cooler cmp l2'::text) THEN table068.operator3
+        END AS cooler_operator4,
+
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'FDR'::text OR table068.kd_samplingpoint::text ~* 'fluizider'::text OR table068.kd_samplingpoint::text ~* 'fluidizer room'::text OR table068.kd_samplingpoint::text ~* 'Fluidizer'::text OR table068.kd_samplingpoint::text ~* 'Fluidizer Room'::text) THEN table068.ha_tpc
+            ELSE NULL::character varying
+        END AS fluidizer_tpc, 
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'FDR'::text OR table068.kd_samplingpoint::text ~* 'fluizider'::text OR table068.kd_samplingpoint::text ~* 'fluidizer room'::text OR table068.kd_samplingpoint::text ~* 'Fluidizer'::text OR table068.kd_samplingpoint::text ~* 'Fluidizer Room'::text) THEN table068.ha_entero
+            ELSE NULL::character varying
+        END AS fluidizer_entero, 
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'FDR'::text OR table068.kd_samplingpoint::text ~* 'fluizider'::text OR table068.kd_samplingpoint::text ~* 'fluidizer room'::text OR table068.kd_samplingpoint::text ~* 'Fluidizer'::text OR table068.kd_samplingpoint::text ~* 'Fluidizer Room'::text) THEN table068.ha_yeast
+            ELSE NULL::character varying
+        END AS fluidizer_yeast, 
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'FDR'::text OR table068.kd_samplingpoint::text ~* 'fluizider'::text OR table068.kd_samplingpoint::text ~* 'fluidizer room'::text OR table068.kd_samplingpoint::text ~* 'Fluidizer'::text OR table068.kd_samplingpoint::text ~* 'Fluidizer Room'::text) THEN table068.ha_mould
+            ELSE NULL::character varying
+        END AS fluidizer_mould, 
+
+        --  Fluidizer Room  Operator
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'FDR'::text OR table068.kd_samplingpoint::text ~* 'fluizider'::text OR table068.kd_samplingpoint::text ~* 'fluidizer room'::text OR table068.kd_samplingpoint::text ~* 'Fluidizer'::text OR table068.kd_samplingpoint::text ~* 'Fluidizer Room'::text) THEN table068.operator
+        END AS fluidizer_operator, 
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'FDR'::text OR table068.kd_samplingpoint::text ~* 'fluizider'::text OR table068.kd_samplingpoint::text ~* 'fluidizer room'::text OR table068.kd_samplingpoint::text ~* 'Fluidizer'::text OR table068.kd_samplingpoint::text ~* 'Fluidizer Room'::text) THEN table068.operator2
+        END AS fluidizer_operator2,
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'FDR'::text OR table068.kd_samplingpoint::text ~* 'fluizider'::text OR table068.kd_samplingpoint::text ~* 'fluidizer room'::text OR table068.kd_samplingpoint::text ~* 'Fluidizer'::text OR table068.kd_samplingpoint::text ~* 'Fluidizer Room'::text) THEN table068.operator3
+        END AS fluidizer_operator3, 
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'FDR'::text OR table068.kd_samplingpoint::text ~* 'fluizider'::text OR table068.kd_samplingpoint::text ~* 'fluidizer room'::text OR table068.kd_samplingpoint::text ~* 'Fluidizer'::text OR table068.kd_samplingpoint::text ~* 'Fluidizer Room'::text) THEN table068.operator3
+        END AS fluidizer_operator4,
+
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'HPM'::text OR table068.kd_samplingpoint::text ~* 'hpm'::text OR table068.kd_samplingpoint::text ~* 'Hopper'::text OR table068.kd_samplingpoint::text ~* 'hopper'::text OR table068.kd_samplingpoint::text ~* 'HPM (ENFLEX)'::text) THEN table068.ha_tpc
+            ELSE NULL::character varying
+        END AS hpm_tpc, 
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'HPM'::text OR table068.kd_samplingpoint::text ~* 'hpm'::text OR table068.kd_samplingpoint::text ~* 'Hopper'::text OR table068.kd_samplingpoint::text ~* 'hopper'::text OR table068.kd_samplingpoint::text ~* 'HPM (ENFLEX)'::text) THEN table068.ha_entero
+            ELSE NULL::character varying
+        END AS hpm_entero, 
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'HPM'::text OR table068.kd_samplingpoint::text ~* 'hpm'::text OR table068.kd_samplingpoint::text ~* 'Hopper'::text OR table068.kd_samplingpoint::text ~* 'hopper'::text OR table068.kd_samplingpoint::text ~* 'HPM (ENFLEX)'::text) THEN table068.ha_yeast
+            ELSE NULL::character varying
+        END AS hpm_yeast, 
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'HPM'::text OR table068.kd_samplingpoint::text ~* 'hpm'::text OR table068.kd_samplingpoint::text ~* 'Hopper'::text OR table068.kd_samplingpoint::text ~* 'hopper'::text OR table068.kd_samplingpoint::text ~* 'HPM (ENFLEX)'::text) THEN table068.ha_mould
+            ELSE NULL::character varying
+        END AS hpm_mould,
+
+        --  HPM Room  Operator
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'FDR'::text OR table068.kd_samplingpoint::text ~* 'fluizider'::text OR table068.kd_samplingpoint::text ~* 'fluidizer room'::text OR table068.kd_samplingpoint::text ~* 'Fluidizer'::text OR table068.kd_samplingpoint::text ~* 'Fluidizer Room'::text) THEN table068.operator
+        END AS hpm_operator, 
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'FDR'::text OR table068.kd_samplingpoint::text ~* 'fluizider'::text OR table068.kd_samplingpoint::text ~* 'fluidizer room'::text OR table068.kd_samplingpoint::text ~* 'Fluidizer'::text OR table068.kd_samplingpoint::text ~* 'Fluidizer Room'::text) THEN table068.operator2
+        END AS hpm_operator2,
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'FDR'::text OR table068.kd_samplingpoint::text ~* 'fluizider'::text OR table068.kd_samplingpoint::text ~* 'fluidizer room'::text OR table068.kd_samplingpoint::text ~* 'Fluidizer'::text OR table068.kd_samplingpoint::text ~* 'Fluidizer Room'::text) THEN table068.operator3
+        END AS hpm_operator3, 
+        CASE
+            WHEN (table068.kd_samplingpoint::text ~* 'FDR'::text OR table068.kd_samplingpoint::text ~* 'fluizider'::text OR table068.kd_samplingpoint::text ~* 'fluidizer room'::text OR table068.kd_samplingpoint::text ~* 'Fluidizer'::text OR table068.kd_samplingpoint::text ~* 'Fluidizer Room'::text) THEN table068.operator3
+        END AS hpm_operator4
+   FROM table_tanggal
+   FULL JOIN table068 ON table_tanggal.tgl_data = table068.tgl_data
+  WHERE table068.lokasi_sampling::text = 'CMP'::text)
+
+  select tgl_data,
+    max(lokasi_sampling) as lokasi_sampling ,
+    max(kd_samplingpoint) as kd_samplingpoint, 
+    max(shift) as shift, 
+    max(operator) as operator, 
+    max(ha_tpc) as ha_tpc, 
+    max(operator2) as operator2, 
+    max(ha_entero) as ha_entero, 
+    max(operator3) as operator3, 
+    max(ha_yeast) as ha_yeast, 
+    max(operator4) as operator4, 
+    max(ha_mould) as ha_mould,
+
+    max(fr_operator) as fr_operator,
+    max(fr_tpc) as fr_tpc,
+    max(fr_operator2) as fr_operator2,
+    max(fr_entero) as fr_entero,
+    max(fr_operator3) as fr_operator3,
+    max(fr_yeast) as fr_yeast,
+    max(fr_operator4) as fr_operator4,
+    max(fr_mould) as fr_mould,
+
+    max(cooling_pack_operator) as cooling_pack_operator,
+    max(cooling_pack_tpc) as cooling_pack_tpc,
+    max(cooling_pack_operator2) as cooling_pack_operator2,
+    max(cooling_pack_entero) as cooling_pack_entero,
+    max(cooling_pack_operator3) as cooling_pack_operator3,
+    max(cooling_pack_yeast) as cooling_pack_yeast,
+    max(cooling_pack_operator4) as cooling_pack_operator4,
+    max(cooling_pack_mould) as cooling_pack_mould,
+
+    max(ducting_operator) as ducting_operator,
+    max(ducting_tpc) as ducting_tpc,
+    max(ducting_operator2) as ducting_operator2,
+    max(ducting_entero) as ducting_entero,
+    max(ducting_operator3) as ducting_operator3,
+    max(ducting_yeast) as ducting_yeast,
+    max(ducting_operator4) as ducting_operator4,
+    max(ducting_mould) as ducting_mould,
+
+    max(cooler_operator) as cooler_operator,
+    max(cooler_tpc) as cooler_tpc,
+    max(cooler_operator2) as cooler_operator2,
+    max( cooler_entero) as  cooler_entero,
+    max(cooler_operator3) as cooler_operator3,
+    max( cooler_yeast) as  cooler_yeast,
+    max(cooler_operator4) as cooler_operator4,
+    max( cooler_mould) as  cooler_mould,
+
+    max(fluidizer_operator) as fluidizer_operator,
+    max(fluidizer_tpc) as fluidizer_tpc,
+    max(fluidizer_operator2) as fluidizer_operator2,
+    max( fluidizer_entero) as  fluidizer_entero,
+    max(fluidizer_operator3) as fluidizer_operator3,
+    max( fluidizer_yeast) as  fluidizer_yeast,
+    max(fluidizer_operator4) as fluidizer_operator4,
+    max( fluidizer_mould) as  fluidizer_mould,
+
+    max(hpm_operator) as hpm_operator,
+    max(hpm_tpc) as hpm_tpc,
+    max(hpm_operator2) as hpm_operator2,
+    max( hpm_entero) as  hpm_entero,
+    max(hpm_operator3) as hpm_operator3,
+    max( hpm_yeast) as  hpm_yeast,
+    max(hpm_operator4) as hpm_operator4,
+    max( hpm_mould) as  hpm_mould,
+
+    max(resulttable.remarks::text) AS remarks
+    from ResultTable 
+  group by tgl_data;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+WITH table_tanggal AS (
+         SELECT tgl_sampling.tgl_sampling::date AS tgl_sampling
+           FROM generate_series((( SELECT min(tblfrmintqad066hdr.tgl_sampling) AS min
+                   FROM tblfrmintqad066hdr))::timestamp with time zone, (( SELECT max(tblfrmintqad066hdr.tgl_sampling) AS max
+                   FROM tblfrmintqad066hdr))::timestamp with time zone, '1 day'::interval) tgl_sampling(tgl_sampling)
+        ), table066 AS (
+         SELECT a.tgl_sampling, a.lokasi_sampling, b.detail_id, b.sampling_point, b.jns_sampling, b.no_lab,
+            b.area, b.sampling_tgl, b.sampling_jam, b.sampling_analis, b.shift, b.dianalisa_oleh,
+            b.ha_tpc, b.ha_entero, b.ha_ecoli_gas, b.ha_ecoli_indol, b.ha_salmonella_he,
+            b.ha_salmonella_xld, b.ha_salmonella_bsa, b.dilaporkan_oleh, b.dilaporkan_tgl, 
+            b.remarks, b.operator, b.operator2
+           FROM tblfrmintqad066hdr a
+      JOIN tblfrmintqad066dtl b ON a.headerid = b.headerid
+        ),
+        ResultTable AS (
+ SELECT table_tanggal.tgl_sampling, table066.jns_sampling,
+    table066.sampling_point, table066.shift, 
+    table066.operator, table066.ha_tpc, table066.operator2, table066.ha_entero,  
+    table066.ha_ecoli_gas, table066.ha_salmonella_he, table066.remarks, 
+
+        -- Bag Filling Room (floor)
+        CASE
+            WHEN (table066.sampling_point ~* '.*(floor).*' OR table066.sampling_point ~* '.*(lantai).*') AND table066.jns_sampling = 'Environment' THEN table066.ha_tpc
+        END AS fr_tpc_floor, 
+        CASE
+            WHEN (table066.sampling_point ~* '.*(floor).*' OR table066.sampling_point ~* '.*(lantai).*') AND table066.jns_sampling = 'Environment' THEN table066.ha_entero
+        END AS fr_entero_floor, 
+        CASE
+            WHEN (table066.sampling_point ~* '.*(floor).*' OR table066.sampling_point ~* '.*(lantai).*') AND table066.jns_sampling = 'Environment' THEN table066.ha_ecoli_gas
+        END AS fr_ecoli_floor, 
+        CASE
+            WHEN (table066.sampling_point ~* '.*(floor).*' OR table066.sampling_point ~* '.*(lantai).*') AND table066.jns_sampling = 'Environment' THEN table066.ha_salmonella_he
+        END AS fr_salmo_floor,
+
+        -- Bag Filling Room (Wall)
+        CASE
+            WHEN (table066.sampling_point ~* '.*(wall).*' OR table066.sampling_point ~* '.*(dinding).*') AND table066.jns_sampling = 'Environment' THEN table066.ha_tpc
+        END AS fr_tpc_wall, 
+        CASE
+            WHEN (table066.sampling_point ~* '.*(wall).*' OR table066.sampling_point ~* '.*(dinding).*') AND table066.jns_sampling = 'Environment' THEN table066.ha_entero
+        END AS fr_entero_wall, 
+        CASE
+            WHEN (table066.sampling_point ~* '.*(wall).*' OR table066.sampling_point ~* '.*(dinding).*') AND table066.jns_sampling = 'Environment' THEN table066.ha_ecoli_gas
+        END AS fr_ecoli_wall, 
+        CASE
+            WHEN (table066.sampling_point ~* '.*(wall).*' OR table066.sampling_point ~* '.*(dinding).*') AND table066.jns_sampling = 'Environment' THEN table066.ha_salmonella_he
+        END AS fr_salmo_wall,
+
+        -- Cooling/Packing Room (floor)
+        CASE
+            WHEN (table066.sampling_point ~* '.*(floor).*' OR table066.sampling_point ~* '.*(lantai).*')  AND table066.jns_sampling = 'Environment' THEN table066.ha_tpc
+        END AS cooling_tpc_floor, 
+        CASE
+            WHEN (table066.sampling_point ~* '.*(floor).*' OR table066.sampling_point ~* '.*(lantai).*')  AND table066.jns_sampling = 'Environment' THEN table066.ha_entero
+        END AS cooling_entero_floor, 
+        CASE
+            WHEN (table066.sampling_point ~* '.*(floor).*' OR table066.sampling_point ~* '.*(lantai).*')  AND table066.jns_sampling = 'Environment' THEN table066.ha_ecoli_gas
+        END AS cooling_ecoli_floor, 
+        CASE
+            WHEN (table066.sampling_point ~* '.*(floor).*' OR table066.sampling_point ~* '.*(lantai).*')  AND table066.jns_sampling = 'Environment' THEN table066.ha_salmonella_he
+        END AS cooling_salmo_floor,
+
+        -- Cooling/Packing Room (wall)
+        CASE
+            WHEN (table066.sampling_point ~* '.*(wall).*' OR table066.sampling_point ~* '.*(dinding).*')  AND table066.jns_sampling = 'Environment' THEN table066.ha_tpc
+        END AS cooling_tpc_wall, 
+        CASE
+            WHEN (table066.sampling_point ~* '.*(wall).*' OR table066.sampling_point ~* '.*(dinding).*')  AND table066.jns_sampling = 'Environment' THEN table066.ha_entero
+        END AS cooling_entero_wall, 
+        CASE
+            WHEN (table066.sampling_point ~* '.*(wall).*' OR table066.sampling_point ~* '.*(dinding).*')  AND table066.jns_sampling = 'Environment' THEN table066.ha_ecoli_gas
+        END AS cooling_ecoli_wall, 
+        CASE
+            WHEN (table066.sampling_point ~* '.*(wall).*' OR table066.sampling_point ~* '.*(dinding).*')  AND table066.jns_sampling = 'Environment' THEN table066.ha_salmonella_he
+        END AS cooling_salmo_wall
+
+   FROM table_tanggal
+   FULL JOIN table066 ON table_tanggal.tgl_sampling = table066.tgl_sampling
+  WHERE table066.lokasi_sampling = 'CMP'  and table066.jns_sampling = 'Environment')
+  select tgl_sampling,
+    max(jns_sampling) as jns_sampling ,
+    max(sampling_point) as sampling_point, 
+    max(shift) as shift, 
+    max(ha_tpc) as ha_tpc, 
+    max(ha_entero) as   ha_entero,
+
+    max(fr_tpc_floor) as fr_tpc_floor,
+    max(fr_entero_floor) as fr_entero_floor,
+    max(fr_ecoli_floor) as fr_ecoli_floor,
+    max(fr_salmo_floor) as fr_salmo_floor,
+
+    max(fr_tpc_wall) as fr_tpc_wall,
+    max(fr_entero_wall) as fr_entero_wall,
+    max(fr_ecoli_wall) as fr_ecoli_wall,
+    max(fr_salmo_wall) as fr_salmo_wall,
+
+    max(cooling_tpc_floor) as cooling_tpc_floor,
+    max(cooling_entero_floor) as cooling_entero_floor,
+    max(cooling_ecoli_floor) as cooling_ecoli_floor,
+    max(cooling_salmo_floor) as cooling_salmo_floor,
+
+    max(cooling_tpc_wall) as cooling_tpc_wall,
+    max( cooling_entero_wall) as  cooling_entero_wall,
+    max( cooling_ecoli_wall) as  cooling_ecoli_wall,
+    max( cooling_salmo_wall) as  cooling_salmo_wall,
+
+    max(resulttable.remarks::text) AS remarks
+    from ResultTable 
+  group by tgl_sampling;
+
+
+
+
+
+
+
+
+  WITH table_tanggal AS (
+         SELECT tgl_sampling.tgl_sampling::date AS tgl_sampling
+           FROM generate_series((( SELECT min(tblfrmintqad066hdr.tgl_sampling) AS min
+                   FROM tblfrmintqad066hdr))::timestamp with time zone, (( SELECT max(tblfrmintqad066hdr.tgl_sampling) AS max
+                   FROM tblfrmintqad066hdr))::timestamp with time zone, '1 day'::interval) tgl_sampling(tgl_sampling)
+        ), table066 AS (
+         SELECT a.tgl_sampling, a.lokasi_sampling, b.detail_id, b.sampling_point, b.jns_sampling, b.no_lab,
+            b.area, b.sampling_tgl, b.sampling_jam, b.sampling_analis, b.shift, b.dianalisa_oleh,
+            b.ha_tpc, b.ha_entero, b.ha_ecoli_gas, b.ha_ecoli_indol, b.ha_salmonella_he,
+            b.ha_salmonella_xld, b.ha_salmonella_bsa, b.dilaporkan_oleh, b.dilaporkan_tgl, 
+            b.remarks, b.operator, b.operator2
+           FROM tblfrmintqad066hdr a
+      JOIN tblfrmintqad066dtl b ON a.headerid = b.headerid
+        ),
+        ResultTable AS (
+ SELECT table_tanggal.tgl_sampling, table066.jns_sampling,
+    table066.sampling_point, table066.shift, 
+    table066.operator, table066.ha_tpc, table066.operator2, table066.ha_entero,  
+    table066.ha_ecoli_gas, table066.ha_salmonella_he, table066.remarks, 
+
+        -- Tri Blender*
+        CASE
+            WHEN (table066.sampling_point ~* '.*(triblender).*' OR table066.sampling_point ~* '.*(tri blender).*') AND table066.jns_sampling = 'Equipment' THEN table066.ha_tpc
+        END AS tb_tpc, 
+        CASE
+            WHEN (table066.sampling_point ~* '.*(triblender).*' OR table066.sampling_point ~* '.*(tri blender).*') AND table066.jns_sampling = 'Equipment' THEN table066.ha_entero
+        END AS tb_entero, 
+        CASE
+            WHEN (table066.sampling_point ~* '.*(triblender).*' OR table066.sampling_point ~* '.*(tri blender).*') AND table066.jns_sampling = 'Equipment' THEN table066.ha_ecoli_gas
+        END AS tb_ecoli, 
+        CASE
+            WHEN (table066.sampling_point ~* '.*(triblender).*' OR table066.sampling_point ~* '.*(tri blender).*') AND table066.jns_sampling = 'Equipment' THEN table066.ha_salmonella_he
+        END AS tb_salmo,
+
+        -- Mixing Tank*
+        CASE
+            WHEN (table066.sampling_point ~* '.*(mixing tank).*' OR table066.sampling_point ~* '.*(mixingtank).*')  AND table066.jns_sampling = 'Equipment' THEN table066.ha_tpc
+        END AS mt_tpc, 
+        CASE
+            WHEN (table066.sampling_point ~* '.*(mixing tank).*' OR table066.sampling_point ~* '.*(mixingtank).*')  AND table066.jns_sampling = 'Equipment' THEN table066.ha_entero
+        END AS mt_entero, 
+        CASE
+            WHEN (table066.sampling_point ~* '.*(mixing tank).*' OR table066.sampling_point ~* '.*(mixingtank).*')  AND table066.jns_sampling = 'Equipment' THEN table066.ha_ecoli_gas
+        END AS mt_ecoli, 
+        CASE
+            WHEN (table066.sampling_point ~* '.*(mixing tank).*' OR table066.sampling_point ~* '.*(mixingtank).*')  AND table066.jns_sampling = 'Equipment' THEN table066.ha_salmonella_he
+        END AS mt_salmo,
+
+        -- Blending Tank 1*
+        CASE
+            WHEN table066.sampling_point ~* '.*(blending tank 1).*' AND table066.jns_sampling = 'Equipment' THEN table066.ha_tpc
+        END AS bt1_tpc, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(blending tank 1).*' AND table066.jns_sampling = 'Equipment' THEN table066.ha_entero
+        END AS bt1_entero, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(blending tank 1).*' AND table066.jns_sampling = 'Equipment' THEN table066.ha_ecoli_gas
+        END AS bt1_ecoli, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(blending tank 1).*' AND table066.jns_sampling = 'Equipment' THEN table066.ha_salmonella_he
+        END AS bt1_salmo,
+
+        -- Blending Tank 2*
+        CASE
+            WHEN table066.sampling_point ~* '.*(blending tank 2).*' AND table066.jns_sampling = 'Equipment' THEN table066.ha_tpc
+        END AS bt2_tpc, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(blending tank 2).*' AND table066.jns_sampling = 'Equipment' THEN table066.ha_entero
+        END AS bt2_entero, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(blending tank 2).*' AND table066.jns_sampling = 'Equipment' THEN table066.ha_ecoli_gas
+        END AS bt2_ecoli, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(blending tank 2).*' AND table066.jns_sampling = 'Equipment' THEN table066.ha_salmonella_he
+        END AS bt2_salmo,
+
+        -- Buffer Tank 1*
+        CASE
+            WHEN (table066.sampling_point ~* '.*(buffer tank 1).*' OR table066.sampling_point ~* '.*(buffer tank).*') AND table066.jns_sampling = 'Equipment' THEN table066.ha_tpc
+        END AS bft1_tpc, 
+        CASE
+            WHEN (table066.sampling_point ~* '.*(buffer tank 1).*' OR table066.sampling_point ~* '.*(buffer tank).*') AND table066.jns_sampling = 'Equipment' THEN table066.ha_entero
+        END AS bft1_entero, 
+        CASE
+            WHEN (table066.sampling_point ~* '.*(buffer tank 1).*' OR table066.sampling_point ~* '.*(buffer tank).*') AND table066.jns_sampling = 'Equipment' THEN table066.ha_ecoli_gas
+        END AS bft1_ecoli, 
+        CASE
+            WHEN (table066.sampling_point ~* '.*(buffer tank 1).*' OR table066.sampling_point ~* '.*(buffer tank).*') AND table066.jns_sampling = 'Equipment' THEN table066.ha_salmonella_he
+        END AS bft1_salmo,
+
+        -- Chute Spray Dryer
+        CASE
+            WHEN (table066.sampling_point ~* '.*(chute).*' OR table066.sampling_point ~* '.*(spray).*') AND table066.jns_sampling = 'Equipment' THEN table066.ha_tpc
+        END AS csd_tpc, 
+        CASE
+            WHEN (table066.sampling_point ~* '.*(chute).*' OR table066.sampling_point ~* '.*(spray).*') AND table066.jns_sampling = 'Equipment' THEN table066.ha_entero
+        END AS csd_entero, 
+        CASE
+            WHEN (table066.sampling_point ~* '.*(chute).*' OR table066.sampling_point ~* '.*(spray).*') AND table066.jns_sampling = 'Equipment' THEN table066.ha_ecoli_gas
+        END AS csd_ecoli, 
+        CASE
+            WHEN (table066.sampling_point ~* '.*(chute).*' OR table066.sampling_point ~* '.*(spray).*') AND table066.jns_sampling = 'Equipment' THEN table066.ha_salmonella_he
+        END AS csd_salmo,
+
+        -- Vibro Filter
+        CASE
+            WHEN table066.sampling_point ~* '.*(vibro).*' AND table066.jns_sampling = 'Equipment' THEN table066.ha_tpc
+        END AS vf_tpc, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(vibro).*' AND table066.jns_sampling = 'Equipment' THEN table066.ha_entero
+        END AS vf_entero, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(vibro).*' AND table066.jns_sampling = 'Equipment' THEN table066.ha_ecoli_gas
+        END AS vf_ecoli, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(vibro).*' AND table066.jns_sampling = 'Equipment' THEN table066.ha_salmonella_he
+        END AS vf_salmo,
+
+        -- Screw Conveyor. 1
+        CASE
+            WHEN (table066.sampling_point ~* '.*(screw 1).*' OR table066.sampling_point ~* '.*(screw conveyour 1).*') AND table066.jns_sampling = 'Equipment' THEN table066.ha_tpc
+        END AS sc1_tpc, 
+        CASE
+            WHEN (table066.sampling_point ~* '.*(screw 1).*' OR table066.sampling_point ~* '.*(screw conveyour 1).*') AND table066.jns_sampling = 'Equipment' THEN table066.ha_entero
+        END AS sc1_entero, 
+        CASE
+            WHEN (table066.sampling_point ~* '.*(screw 1).*' OR table066.sampling_point ~* '.*(screw conveyour 1).*') AND table066.jns_sampling = 'Equipment' THEN table066.ha_ecoli_gas
+        END AS sc1_ecoli, 
+        CASE
+            WHEN (table066.sampling_point ~* '.*(screw 1).*' OR table066.sampling_point ~* '.*(screw conveyour 1).*') AND table066.jns_sampling = 'Equipment' THEN table066.ha_salmonella_he
+        END AS sc1_salmo,
+
+        -- Screw Conveyor. 2
+        CASE
+            WHEN (table066.sampling_point ~* '.*(screw 2).*' OR table066.sampling_point ~* '.*(screw conveyour 2).*') AND table066.jns_sampling = 'Equipment' THEN table066.ha_tpc
+        END AS sc2_tpc, 
+        CASE
+            WHEN (table066.sampling_point ~* '.*(screw 2).*' OR table066.sampling_point ~* '.*(screw conveyour 2).*') AND table066.jns_sampling = 'Equipment' THEN table066.ha_entero
+        END AS sc2_entero, 
+        CASE
+            WHEN (table066.sampling_point ~* '.*(screw 2).*' OR table066.sampling_point ~* '.*(screw conveyour 2).*') AND table066.jns_sampling = 'Equipment' THEN table066.ha_ecoli_gas
+        END AS sc2_ecoli, 
+        CASE
+            WHEN (table066.sampling_point ~* '.*(screw 2).*' OR table066.sampling_point ~* '.*(screw conveyour 2).*') AND table066.jns_sampling = 'Equipment' THEN table066.ha_salmonella_he
+        END AS sc2_salmo,
+
+        -- Outlet Vibro Fluidizer
+        CASE
+            WHEN table066.sampling_point ~* '.*(outlet).*' AND table066.jns_sampling = 'Equipment' THEN table066.ha_tpc
+        END AS ovf_tpc, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(outlet).*' AND table066.jns_sampling = 'Equipment' THEN table066.ha_entero
+        END AS ovf_entero, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(outlet).*' AND table066.jns_sampling = 'Equipment' THEN table066.ha_ecoli_gas
+        END AS ovf_ecoli, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(outlet).*' AND table066.jns_sampling = 'Equipment' THEN table066.ha_salmonella_he
+        END AS ovf_salmo,
+
+        -- Chute cyclone
+        CASE
+            WHEN table066.sampling_point ~* '.*(cyclone).*' AND table066.jns_sampling = 'Equipment' THEN table066.ha_tpc
+        END AS cc_tpc, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(cyclone).*' AND table066.jns_sampling = 'Equipment' THEN table066.ha_entero
+        END AS cc_entero, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(cyclone).*' AND table066.jns_sampling = 'Equipment' THEN table066.ha_ecoli_gas
+        END AS cc_ecoli, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(cyclone).*' AND table066.jns_sampling = 'Equipment' THEN table066.ha_salmonella_he
+        END AS cc_salmo,
+
+        -- Screw Feeder Enflex
+        CASE
+            WHEN table066.sampling_point ~* '.*(feeder).*' AND table066.jns_sampling = 'Equipment' THEN table066.ha_tpc
+        END AS sfe_tpc, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(feeder).*' AND table066.jns_sampling = 'Equipment' THEN table066.ha_entero
+        END AS sfe_entero, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(feeder).*' AND table066.jns_sampling = 'Equipment' THEN table066.ha_ecoli_gas
+        END AS sfe_ecoli, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(feeder).*' AND table066.jns_sampling = 'Equipment' THEN table066.ha_salmonella_he
+        END AS sfe_salmo,
+
+        -- Hopper Auger Filling
+        CASE
+            WHEN table066.sampling_point ~* '.*(hopper).*' AND table066.jns_sampling = 'Equipment' THEN table066.ha_tpc
+        END AS haf_tpc, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(hopper).*' AND table066.jns_sampling = 'Equipment' THEN table066.ha_entero
+        END AS haf_entero, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(hopper).*' AND table066.jns_sampling = 'Equipment' THEN table066.ha_ecoli_gas
+        END AS haf_ecoli, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(hopper).*' AND table066.jns_sampling = 'Equipment' THEN table066.ha_salmonella_he
+        END AS haf_salmo,
+
+        --  Cone Blender
+        CASE
+            WHEN table066.sampling_point ~* '.*(cone).*' AND table066.jns_sampling = 'Equipment' THEN table066.ha_tpc
+        END AS cb_tpc, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(cone).*' AND table066.jns_sampling = 'Equipment' THEN table066.ha_entero
+        END AS cb_entero, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(cone).*' AND table066.jns_sampling = 'Equipment' THEN table066.ha_ecoli_gas
+        END AS cb_ecoli, 
+        CASE
+            WHEN table066.sampling_point ~* '.*(cone).*' AND table066.jns_sampling = 'Equipment' THEN table066.ha_salmonella_he
+        END AS cb_salmo
+
+   FROM table_tanggal
+   FULL JOIN table066 ON table_tanggal.tgl_sampling = table066.tgl_sampling
+  WHERE table066.lokasi_sampling = 'CMP'  and table066.jns_sampling = 'Equipment')
+
+  select tgl_sampling,
+    max(jns_sampling) as jns_sampling ,
+    max(sampling_point) as sampling_point, 
+    max(shift) as shift, 
+    max(ha_tpc) as ha_tpc, 
+    max(ha_entero) as   ha_entero,
+
+    max(tb_tpc) as tb_tpc,
+    max(tb_entero) as tb_entero,
+    max(tb_ecoli) as tb_ecoli,
+    max(tb_salmo) as tb_salmo,
+
+    max(mt_tpc) as mt_tpc,
+    max(mt_entero) as mt_entero,
+    max(mt_ecoli) as mt_ecoli,
+    max(mt_salmo) as mt_salmo,
+
+    max(bt1_tpc) as bt1_tpc,
+    max(bt1_entero) as bt1_entero,
+    max(bt1_ecoli) as bt1_ecoli,
+    max(bt1_salmo) as bt1_salmo,
+
+    max(bt2_tpc) as bt2_tpc,
+    max( bt2_entero) as  bt2_entero,
+    max( bt2_ecoli) as  bt2_ecoli,
+    max( bt2_salmo) as  bt2_salmo,
+
+    max(bft1_tpc) as bft1_tpc,
+    max( bft1_entero) as  bft1_entero,
+    max( bft1_ecoli) as  bft1_ecoli,
+    max( bft1_salmo) as  bft1_salmo,
+
+    max(csd_tpc) as csd_tpc,
+    max( csd_entero) as  csd_entero,
+    max( csd_ecoli) as  csd_ecoli,
+    max( csd_salmo) as  csd_salmo,
+
+    max(vf_tpc) as vf_tpc,
+    max( vf_entero) as  vf_entero,
+    max( vf_ecoli) as  vf_ecoli,
+    max( vf_salmo) as  vf_salmo,
+
+    max(sc1_tpc) as sc1_tpc,
+    max( sc1_entero) as  sc1_entero,
+    max( sc1_ecoli) as  sc1_ecoli,
+    max( sc1_salmo) as  sc1_salmo,
+
+    max(sc2_tpc) as sc2_tpc,
+    max( sc2_entero) as  sc2_entero,
+    max( sc2_ecoli) as  sc2_ecoli,
+    max( sc2_salmo) as  sc2_salmo,
+
+    max(ovf_tpc) as ovf_tpc,
+    max( ovf_entero) as  ovf_entero,
+    max( ovf_ecoli) as  ovf_ecoli,
+    max( ovf_salmo) as  ovf_salmo,
+
+    max(cc_tpc) as cc_tpc,
+    max( cc_entero) as  cc_entero,
+    max( cc_ecoli) as  cc_ecoli,
+    max( cc_salmo) as  cc_salmo,
+
+    max(sfe_tpc) as sfe_tpc,
+    max( sfe_entero) as  sfe_entero,
+    max( sfe_ecoli) as  sfe_ecoli,
+    max( sfe_salmo) as  sfe_salmo,
+
+    max(haf_tpc) as haf_tpc,
+    max( haf_entero) as  haf_entero,
+    max( haf_ecoli) as  haf_ecoli,
+    max( haf_salmo) as  haf_salmo,
+
+    max(cb_tpc) as cb_tpc,
+    max( cb_entero) as  cb_entero,
+    max( cb_ecoli) as  cb_ecoli,
+    max( cb_salmo) as  cb_salmo,
+
+
+    max(resulttable.remarks::text) AS remarks
+    from ResultTable 
+  group by tgl_sampling;
